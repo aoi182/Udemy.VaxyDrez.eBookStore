@@ -27,7 +27,7 @@ namespace eBookStore.API.Author.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     CenterName = table.Column<string>(nullable: true),
                     AchievedOn = table.Column<DateTimeOffset>(nullable: false),
                     AuthorId = table.Column<int>(nullable: false)
@@ -42,6 +42,31 @@ namespace eBookStore.API.Author.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Authors",
+                columns: new[] { "Id", "DateOfBirth", "Name" },
+                values: new object[] { 1, new DateTimeOffset(new DateTime(1980, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, -5, 0, 0, 0)), "Lucas Pavack" });
+
+            migrationBuilder.InsertData(
+                table: "Authors",
+                columns: new[] { "Id", "DateOfBirth", "Name" },
+                values: new object[] { 2, new DateTimeOffset(new DateTime(1984, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, -5, 0, 0, 0)), "Angela Nolskyv" });
+
+            migrationBuilder.InsertData(
+                table: "AcademicDegrees",
+                columns: new[] { "Id", "AchievedOn", "AuthorId", "CenterName", "Name" },
+                values: new object[] { 1, new DateTimeOffset(new DateTime(1980, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, -5, 0, 0, 0)), 1, "Academy Accel", "Associate degrees" });
+
+            migrationBuilder.InsertData(
+                table: "AcademicDegrees",
+                columns: new[] { "Id", "AchievedOn", "AuthorId", "CenterName", "Name" },
+                values: new object[] { 2, new DateTimeOffset(new DateTime(1995, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, -5, 0, 0, 0)), 2, "College Discover", "Associate degrees" });
+
+            migrationBuilder.InsertData(
+                table: "AcademicDegrees",
+                columns: new[] { "Id", "AchievedOn", "AuthorId", "CenterName", "Name" },
+                values: new object[] { 3, new DateTimeOffset(new DateTime(1990, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, -5, 0, 0, 0)), 2, "Higher Institute", "Associate degrees" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AcademicDegrees_AuthorId",

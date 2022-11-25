@@ -37,6 +37,36 @@ namespace eBookStore.API.Book.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AuthorId = 1,
+                            Name = "To Kill a Mockingbird",
+                            Price = 5m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AuthorId = 1,
+                            Name = "The Great Gatsby",
+                            Price = 5m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AuthorId = 1,
+                            Name = "One Hundred Years of Solitude",
+                            Price = 5m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AuthorId = 1,
+                            Name = "A Passage to India",
+                            Price = 5m
+                        });
                 });
 #pragma warning restore 612, 618
         }

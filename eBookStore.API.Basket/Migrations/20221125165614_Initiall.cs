@@ -44,6 +44,28 @@ namespace eBookStore.API.Basket.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Baskets",
+                columns: new[] { "Id", "CreatedOn", "Status", "Username" },
+                values: new object[] { 1, new DateTimeOffset(new DateTime(2022, 11, 25, 16, 56, 14, 18, DateTimeKind.Unspecified).AddTicks(2386), new TimeSpan(0, 0, 0, 0, 0)), 1, "aoi@182@live.com" });
+
+            migrationBuilder.InsertData(
+                table: "Baskets",
+                columns: new[] { "Id", "CreatedOn", "Status", "Username" },
+                values: new object[] { 2, new DateTimeOffset(new DateTime(2022, 11, 25, 16, 56, 14, 18, DateTimeKind.Unspecified).AddTicks(3414), new TimeSpan(0, 0, 0, 0, 0)), 1, "aoi@182@live.com" });
+
+            migrationBuilder.InsertData(
+                table: "Items",
+                columns: new[] { "Id", "BasketId", "BookId", "CreatedOn", "PurchasedPrice" },
+                values: new object[,]
+                {
+                    { 1, 1, 1, new DateTimeOffset(new DateTime(2022, 11, 25, 16, 56, 14, 19, DateTimeKind.Unspecified).AddTicks(5835), new TimeSpan(0, 0, 0, 0, 0)), 5 },
+                    { 2, 1, 2, new DateTimeOffset(new DateTime(2022, 11, 25, 16, 56, 14, 19, DateTimeKind.Unspecified).AddTicks(7019), new TimeSpan(0, 0, 0, 0, 0)), 5 },
+                    { 3, 1, 3, new DateTimeOffset(new DateTime(2022, 11, 25, 16, 56, 14, 19, DateTimeKind.Unspecified).AddTicks(7055), new TimeSpan(0, 0, 0, 0, 0)), 5 },
+                    { 5, 2, 2, new DateTimeOffset(new DateTime(2022, 11, 25, 16, 56, 14, 19, DateTimeKind.Unspecified).AddTicks(7057), new TimeSpan(0, 0, 0, 0, 0)), 5 },
+                    { 6, 2, 2, new DateTimeOffset(new DateTime(2022, 11, 25, 16, 56, 14, 19, DateTimeKind.Unspecified).AddTicks(7060), new TimeSpan(0, 0, 0, 0, 0)), 5 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Items_BasketId",
                 table: "Items",

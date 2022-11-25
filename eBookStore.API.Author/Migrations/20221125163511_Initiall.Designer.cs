@@ -10,7 +10,7 @@ using eBookStore.API.Author.Persistence;
 namespace eBookStore.API.Author.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221107051103_Initiall")]
+    [Migration("20221125163511_Initiall")]
     partial class Initiall
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,14 +37,40 @@ namespace eBookStore.API.Author.Migrations
                     b.Property<string>("CenterName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Name")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
 
                     b.ToTable("AcademicDegrees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AchievedOn = new DateTimeOffset(new DateTime(1980, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, -5, 0, 0, 0)),
+                            AuthorId = 1,
+                            CenterName = "Academy Accel",
+                            Name = "Associate degrees"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AchievedOn = new DateTimeOffset(new DateTime(1995, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, -5, 0, 0, 0)),
+                            AuthorId = 2,
+                            CenterName = "College Discover",
+                            Name = "Associate degrees"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AchievedOn = new DateTimeOffset(new DateTime(1990, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, -5, 0, 0, 0)),
+                            AuthorId = 2,
+                            CenterName = "Higher Institute",
+                            Name = "Associate degrees"
+                        });
                 });
 
             modelBuilder.Entity("eBookStore.API.Author.Model.Author", b =>
@@ -63,6 +89,20 @@ namespace eBookStore.API.Author.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Authors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateOfBirth = new DateTimeOffset(new DateTime(1980, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, -5, 0, 0, 0)),
+                            Name = "Lucas Pavack"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateOfBirth = new DateTimeOffset(new DateTime(1984, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, -5, 0, 0, 0)),
+                            Name = "Angela Nolskyv"
+                        });
                 });
 
             modelBuilder.Entity("eBookStore.API.Author.Model.AcademicDegree", b =>

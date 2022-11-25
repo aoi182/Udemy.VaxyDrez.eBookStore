@@ -1,8 +1,13 @@
+---------------------------------------------------------------------------------------------
+------EF-------------------------------------------------------------------------------------
+
 -- to create the first migration
-dotnet ef migrations add Initiall --project eBookStore.API.Author
+CLI> dotnet ef migrations add Initiall --project eBookStore.API.Author
+PM> add-migration Initiall
 
 -- to run the migrations
-dotnet ef database update --project eBookStore.API.Author
+CLI> dotnet ef database update --project eBookStore.API.Author
+PM> Update-database
 
 ---------------------------------------------------------------------------------------------
 ------GIT------------------------------------------------------------------------------------
@@ -10,3 +15,52 @@ dotnet ef database update --project eBookStore.API.Author
 -- to see the git global configuration
 git config --global
 
+---------------------------------------------------------------------------------------------
+------DOCKER------------------------------------------------------------------------------------
+
+-- run and expose a containerized postgres service
+docker run --name my-postgres -e POSTGRES_PASSWORD=admin -d -p 5432:5432 postgres:latest
+
+-- start a bash into the containre
+docker exec -it my-postgres bash
+
+-- run and expose a containerized mssql server service
+docker run --name my-mssql -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Admin123." -p 1433:1433 -d mcr.microsoft.com/mssql/server:latest
+
+docker network connect my-bridge-network my-authors-api
+docker run --name my-authors-api -d -p 5021:80 store.api.authors
+docker inspect my-bridge-network
+docker inspect my-mssql
+
+
+docker build -t store.api.authors .
+
+---------------------------------------------------------------------------------------------
+------POSTGRES-------------------------------------------------------------------------------
+
+-- start sesion with postgres user
+psql -U postgres
+
+-- list user roles
+\du
+
+-- create a database
+create database <database-name>;
+
+-- list databases
+\l
+
+-- connect to a database
+\c <database-name>
+
+-- list tables (relations)
+\d
+
+---------------------------------------------------------------------------------------------
+------Microsoft SQL Server-------------------------------------------------------------------
+
+-- to pull image
+docker pull mcr.microsoft.com/mssql/server
+
+-- to run a new container
+docker run --name my-mssql -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Admin123." -p 1433:1433 -d mcr.microsoft.com/mssql/server:latest

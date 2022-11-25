@@ -1,12 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace eBookStore.API.Book
 {
@@ -14,6 +9,7 @@ namespace eBookStore.API.Book
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine($"eBookStore.API.Book <-> these are my args [{string.Join(",", args)}]");
             CreateHostBuilder(args).Build().Run();
         }
 

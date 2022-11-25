@@ -35,18 +35,18 @@ namespace eBookStore.API.Basket.Application.Item
 
         public async Task<IEnumerable<ItemDto>> Handle(GetItems request, CancellationToken cancellationToken)
         {
-            var entities = await _context.Items.Where(q => q.BasketId == request.BasketId).ToListAsync(cancellationToken);
+            var items = await _context.Items.Where(q => q.BasketId == request.BasketId).ToListAsync(cancellationToken);
 
-            var dtos = _mapper.Map<IEnumerable<ItemDto>>(entities);
+            var itemDtos = _mapper.Map<IEnumerable<ItemDto>>(items);
 
-            foreach (var dto in dtos)
+            foreach (var item in itemDtos)
             {
-                var bookDetails = await _bookService.GetBookAsync(dto.Id);
+                var bookDetails = await _bookService.GetBookAsync(item.BookId);
                 if (bookDetails.Item2)
                 {
-                    dto.BookDetails = new Book
+                    item.BookDetails = new Book
                     {
-                        Id = dto.Id,
+                        Id = item.Id,
                         AuthorId = bookDetails.Item1.AuthorId,
                         Name = bookDetails.Item1.Name,
                         Price = bookDetails.Item1.Price
@@ -54,7 +54,7 @@ namespace eBookStore.API.Basket.Application.Item
                 }
             }
 
-            return dtos;
+            return itemDtos;
         }
     }
 }
